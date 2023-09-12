@@ -1,33 +1,35 @@
 import React from 'react'
+import { HomeProps } from '../types/type'
 import ProfilePicture from "../images/profile_picture.jpg"
+import { Link } from "react-router-dom"
 
-export default function Home() {
+export default function Home({isLoggedIn}: HomeProps) {
   return (
     <>
       <header>
         <div className="header-element">
           <img className="profile-image" src={ProfilePicture} alt="My picture"/>
         </div>
-        <a className="toggle-button" href="#">
+        <Link className="toggle-button" to="#">
           <span className="bar"></span>
           <span className="bar"></span>
           <span className="bar"></span>
-        </a>
+        </Link>
         <div className="header-element-links">
-          <a className="header-link" href="https://github.com/JessePlym" target="_blank">
+          <Link className="header-link" to="https://github.com/JessePlym" target="_blank">
             GitHub
-          </a>
-          <a className="header-link" href="https://www.linkedin.com/in/jesse-plym-080056254/" target="_blank">
+          </Link>
+          <Link className="header-link" to="https://www.linkedin.com/in/jesse-plym-080056254/" target="_blank">
             LinkedIn
-          </a>
-          <a className="header-link application-link" href="login.html">
+          </Link>
+          <Link className="header-link application-link" to="/application">
             App
-          </a>
+          </Link>
         </div>
         <div className="header-element">
-          <a className="log-in-link" href="login.html">
-            Log in
-          </a>
+          <Link className="log-in-link" to={isLoggedIn ? "/" : "/login"}>
+            {isLoggedIn ? "Log out" : "Log in"}
+          </Link>
         </div>
       </header>
     <main className="home-page-main">
@@ -49,16 +51,16 @@ export default function Home() {
           </h2>
           <p>
             Track your personal finances with this application. 
-            Link to the source code is <span><a target="_blank" href="https://github.com/JessePlym/AccountingBackend">here</a></span>.
+            Link to the source code is <span><Link target="_blank" to="https://github.com/JessePlym/AccountingBackend">here</Link></span>.
             Try the application by signing up or logging in with an account.
           </p>
-          <a href="register.html">
+          <Link to="/register">
             Sign up here
-          </a>
+          </Link>
           <br />
-          <a className="application-link" href="login.html">
+          <Link className="application-link" to={isLoggedIn ? "/app" : "/login"}>
             Go to application
-          </a>
+          </Link>
         </div>
       </section>
     </main>
