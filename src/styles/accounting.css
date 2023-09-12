@@ -1,0 +1,205 @@
+body {
+  background-image: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 10px;
+  gap: 1rem;
+}
+
+.search-container {
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+@media (max-width: 800px) {
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  
+  .display-container {
+    margin-bottom: 10px;
+  }
+
+  .table-created, .table-updated, .table-category {
+    display: none;
+  }
+}
+
+.table-container input, .table-container select {
+  margin-bottom: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: inherit;
+  outline: none;
+  transition: 90ms;
+}
+
+#category-input {
+  width: 70px;
+}
+
+#category-input:focus, #source-input:focus, #select-display:focus {
+  border-color: #1457c3;
+}
+
+.total-add-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-new-button, .back-link {
+  background-color: #537ec3;
+  padding: 10px 15px 10px 15px;
+  color: aliceblue;
+  font-size: 1.25rem;
+  border-radius: 15px;
+  border: solid;
+  border-color: #333;
+  text-decoration: none;
+}
+
+.add-new-button:hover, .back-link:hover {
+  opacity: 0.8;
+}
+
+.add-new-button:active, .back-link:active {
+  background-color: #2a4879;
+}
+
+.source-filter, .receiver-filter {
+  display: none;
+}
+
+.payment-table {
+  background-color: whitesmoke;
+  border: solid;
+  border-width: 2px;
+  border-color: #333;
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 1px 1px 8px;
+}
+
+tbody, thead {
+  background-color: white;
+}
+
+th, td{
+  border: solid;
+  border-width: 1px;
+  border-color: #333;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+tbody > tr:hover {
+  background-color: #333;
+  opacity: 0.6;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.table-id {
+  display: none;
+}
+
+.table-amount-negative {
+  color: red;
+}
+
+.table-amount-positive {
+  color: green;
+}
+
+.table-delete-button {
+  background-color: rgb(239, 0, 0);
+  width: 100%;
+  border: solid;
+  border-width: 1px;
+  border-color: black;
+  color: whitesmoke
+}
+
+.table-delete-button:active {
+  background-color: rebeccapurple;
+}
+
+.table-delete-button:hover {
+  opacity: 0.6;
+}
+
+.modal {
+  margin: auto;
+  top: 50%;
+  bottom: 50%;
+  padding: 15px;
+  width: 400px;
+  background-color: whitesmoke;
+  border: solid;
+  border-width: 2px;
+  border-color: #333;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 1px 1px 8px;
+  gap: 5px;
+}
+
+.modal::backdrop {
+  background-color: #333;
+  opacity: 0.5;
+}
+
+.form-field {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+}
+
+.form-field > input, .form-field > select {
+  width: 80%;
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 2px;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: 50ms;
+}
+
+.form-field > input:focus, .form-field > select:focus {
+  border-color: #1457c3;
+}
+
+.form-field > .receiver-input,
+.form-field > .source-input {
+  display: none;
+}
+
+.form-field > .receiver-input.active,
+.form-field > .source-input.active {
+  display: block;
+}
+
+.modal-form > button {
+  font-size: 1.2rem;
+  width: 10ch;
+}

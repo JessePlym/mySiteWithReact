@@ -1,0 +1,125 @@
+header {
+  display: flex;
+  background-color: #333;
+  min-width: 400px;
+  min-height: 100px;
+  color: whitesmoke;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-element {
+  margin-right: 0.75rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.profile-image {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 115px;
+  border-radius: 40%;
+}
+
+.header-element-links {
+  margin: 1rem;
+  display: flex;
+}
+
+.header-link {
+  display: block;
+  background-color: whitesmoke;
+  text-decoration: none;
+  border: solid;
+  border-width: 1px;
+  padding: 1rem;
+  color: #333;
+  align-items: center;
+}
+
+.header-link:hover {
+  border: solid;
+  border-color: #1457c3;
+  border-width: 2px;
+  padding: 18px;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 1.25rem;
+  right: 40%;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60px;
+  height: 40px;
+}
+
+.toggle-button .bar {
+  height: 4px;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 10px
+}
+
+.log-in-link, .log-out-link {
+  position: absolute;
+  top: 2rem;
+  right: 0.75rem;
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.log-in-link:hover, .log-out-link:hover {
+  color: #1457c3;
+}
+
+.home-page-main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin: 0.5rem;
+}
+
+section {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 20px;
+  justify-content: center;
+}
+
+.user-welcome {
+  display: none;
+}
+
+.user-welcome.active {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .toggle-button {
+    display: flex;
+  }
+
+  .header-element-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  header {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .header-link {
+    text-align: center;
+  }
+
+  .header-element-links.active {
+    display: flex;
+    padding-top: 70px;
+  }
+
+}
