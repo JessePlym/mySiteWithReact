@@ -1,9 +1,32 @@
-import React from 'react'
 import { HomeProps } from '../types/props'
+import { User } from '../types/type'
 import ProfilePicture from "../images/profile_picture.jpg"
 import { Link } from "react-router-dom"
+import { getUserDetails } from '../requests/user'
+import { useEffect, useState } from 'react'
 
-export default function Home({isLoggedIn}: HomeProps) {
+export default function Home({isLoggedIn, setIsLoggedIn}: HomeProps) {
+  const [userDetails, setUserDetails] = useState<User>()
+
+  useEffect(() => {
+    async function fetchUser() {
+      if (isLoggedIn) {
+        const user: User = await getUserDetails()
+        setUserDetails(user)
+      } else {
+        setUserDetails({} as User)
+      }
+    }
+    fetchUser()
+  }, [isLoggedIn])
+
+  const logOut = () => {
+    if (isLoggedIn) {
+      localStorage.clear()
+      setIsLoggedIn(false)
+    }
+  }
+
   return (
     <>
       <header>
@@ -27,7 +50,7 @@ export default function Home({isLoggedIn}: HomeProps) {
           </Link>
         </div>
         <div className="header-element">
-          <Link className="log-in-link" to={isLoggedIn ? "/" : "/login"}>
+          <Link className="log-in-link" to={isLoggedIn ? "/" : "/login"} onClick={logOut}>
             {isLoggedIn ? "Log out" : "Log in"}
           </Link>
         </div>
@@ -42,8 +65,8 @@ export default function Home({isLoggedIn}: HomeProps) {
         <h1>
           My applications
         </h1>
-        <p className="user-welcome">
-          Welcome user
+        <p>
+          {userDetails?.firstName && `Welcome ${userDetails.firstName}`}
         </p>
         <div>
           <h2>

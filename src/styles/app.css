@@ -89,14 +89,6 @@ section {
   justify-content: center;
 }
 
-.user-welcome {
-  display: none;
-}
-
-.user-welcome.active {
-  display: flex;
-}
-
 @media (max-width: 600px) {
   .toggle-button {
     display: flex;

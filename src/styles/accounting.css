@@ -143,7 +143,7 @@ tbody > tr:hover {
   opacity: 0.6;
 }
 
-.modal {
+/* .modal {
   margin: auto;
   top: 50%;
   bottom: 50%;
@@ -198,4 +198,4 @@ tbody > tr:hover {
 .modal-form > button {
   font-size: 1.2rem;
   width: 10ch;
-}
+} */
