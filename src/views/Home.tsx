@@ -22,7 +22,7 @@ export default function Home({isLoggedIn}: HomeProps) {
           <Link className="header-link" to="https://www.linkedin.com/in/jesse-plym-080056254/" target="_blank">
             LinkedIn
           </Link>
-          <Link className="header-link application-link" to="/application">
+          <Link className="header-link application-link" to={isLoggedIn ? "/application" : "/login"}>
             App
           </Link>
         </div>

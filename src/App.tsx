@@ -4,6 +4,7 @@ import "./styles/app.css"
 import Home from "./views/Home.tsx"
 import { Route, Routes } from "react-router-dom"
 import Login from "./views/Login.tsx"
+import Register from "./views/Register.tsx"
 
 
 
@@ -36,11 +37,13 @@ export default function App() {
         isLoggedIn ? (
           <Routes>
             <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>}/>
+            <Route path="/register" element={<Register />}/>
           </Routes>
         ) : (
           <Routes>
             <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>}/>
             <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
           </Routes>
         )
       }
