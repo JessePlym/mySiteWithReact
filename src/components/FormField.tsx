@@ -1,4 +1,4 @@
-import { FormFieldProps } from "../types/type"
+import { FormFieldProps } from "../types/props"
 
 export default function FormField({
   label,

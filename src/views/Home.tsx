@@ -1,5 +1,5 @@
 import React from 'react'
-import { HomeProps } from '../types/type'
+import { HomeProps } from '../types/props'
 import ProfilePicture from "../images/profile_picture.jpg"
 import { Link } from "react-router-dom"
 
@@ -58,7 +58,7 @@ export default function Home({isLoggedIn}: HomeProps) {
             Sign up here
           </Link>
           <br />
-          <Link className="application-link" to={isLoggedIn ? "/app" : "/login"}>
+          <Link className="application-link" to={isLoggedIn ? "/application" : "/login"}>
             Go to application
           </Link>
         </div>

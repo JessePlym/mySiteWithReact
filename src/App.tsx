@@ -5,12 +5,13 @@ import Home from "./views/Home.tsx"
 import { Route, Routes } from "react-router-dom"
 import Login from "./views/Login.tsx"
 import Register from "./views/Register.tsx"
+import Accounting from "./views/Accounting.tsx"
 
 
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
 
   // const credentials: Credentials = {
   //   username: "Plymander",
@@ -38,6 +39,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>}/>
             <Route path="/register" element={<Register />}/>
+            <Route path="/application" element={<Accounting />}/>
           </Routes>
         ) : (
           <Routes>
