@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { API_URL} from "./assets/API.ts"
 import "./styles/app.css"
 import Home from "./views/Home.tsx"
 import { Navigate, Route, Routes } from "react-router-dom"
