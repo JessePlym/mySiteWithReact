@@ -2,9 +2,20 @@ import { Link } from "react-router-dom"
 import "../styles/accounting.css"
 import PaymentTable from "../components/PaymentTable"
 import FilterInput from "../components/FilterInput"
+import { useEffect, useState } from "react"
+import { Payment } from "../types/type"
+import { getAllUsersPayments } from "../requests/payment"
 
 
 export default function Accounting() {
+  const [payments, setPayments] = useState<Payment[]>([]);
+
+  useEffect(() => {
+    const getPayments = async () => {
+      setPayments(await getAllUsersPayments())
+    }
+    getPayments()
+  }, [])
   return (
     <>
       <main className="table-container">
@@ -53,7 +64,7 @@ export default function Accounting() {
             Add
           </button>
         </div>
-        <PaymentTable />
+        <PaymentTable payments={payments}/>
     
         <Link className="back-link" to="/">
           Go Back

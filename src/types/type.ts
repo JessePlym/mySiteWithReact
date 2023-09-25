@@ -4,7 +4,7 @@ export type Credentials = {
 }
 
 export type User = {
-  id: number
+  id: string
   firstName: string
   lastName: string
   username: string
@@ -13,12 +13,12 @@ export type User = {
 }
 
 export type Category = {
-  id: number
+  id: string
   name: string
 }
 
 export type Income = {
-  id: number
+  id: string
   amount: number
   description: string
   createdAt: string
@@ -30,13 +30,26 @@ export type Income = {
 }
 
 export type Expense = {
-  id: number
+  id: string
   amount: number
   description: string
   createdAt: string
   updatedAt: string
   isContinous: boolean
   receiver: string
+  category: Category
+  user: User
+}
+
+export type Payment = {
+  id: string
+  amount: number
+  description: string
+  createdAt: string
+  updatedAt: string
+  isContinous: boolean
+  receiver?: string
+  source?: string
   category: Category
   user: User
 }

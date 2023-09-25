@@ -1,5 +1,5 @@
 import { API_URL } from "../assets/API"
-import { Expense, Income } from "../types/type"
+import { Expense, Income, Payment } from "../types/type"
 
 const token = localStorage.getItem("Authorization")
 const getRequestConfig: RequestInit = {
@@ -37,7 +37,7 @@ export async function getAllUsersPayments() {
   }
 }
 
-export async function getPaymentsByCategory(categoryId: number) {
+export async function getPaymentsByCategory(categoryId: number): Promise<Payment[] | void> {
   try {
     const response = await fetch(`${API_URL}api/user/payments/by-category?category_id=${categoryId}`, getRequestConfig)
     if (!response.ok) {

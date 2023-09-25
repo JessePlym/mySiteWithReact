@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
+import { Payment } from "./type"
 
 export type HomeProps = {
   isLoggedIn: boolean
@@ -27,4 +28,8 @@ export type FilterInputProps = {
   value: string | number
   minValue?: number
   placeholder?: string
+}
+
+export type PaymentTableProps = {
+  payments: Payment[]
 }
