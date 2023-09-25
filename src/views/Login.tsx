@@ -15,7 +15,7 @@ export default function Login({setIsLoggedIn}: LoginProps) {
     e.preventDefault()
     if (await logIn(credentials)) {
       setIsLoggedIn(true)
-      navigate("/application")
+      navigate("/")
     }
   }
 

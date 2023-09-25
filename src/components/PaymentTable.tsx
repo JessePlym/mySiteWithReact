@@ -2,7 +2,7 @@ import { PaymentTableProps } from "../types/props";
 import { capitalizeFirstLetter } from "../utils/stringFormat";
 import { formatDate } from "../utils/dateFormat";
 
-export default function PaymentTable({payments}: PaymentTableProps) {
+export default function PaymentTable({payments, paymentType}: PaymentTableProps) {
   return (
     <table className="payment-table">
       <thead className="table-head">
@@ -19,9 +19,20 @@ export default function PaymentTable({payments}: PaymentTableProps) {
           <th className="table-updated">
             UpdatedAt
           </th>
-          <th className="receiver source">
-            Receiver/Source
-          </th>
+          {
+            paymentType === "income" ? 
+              <th className="receiver source">
+                Source
+              </th>
+            : paymentType === "expense" ?
+              <th className="receiver source">
+                Receiver
+              </th>
+            : 
+              <th className="receiver source">
+                Receiver/Source
+              </th>
+          }
           <th className="table-category">
             Category (ID)
           </th>
@@ -29,36 +40,34 @@ export default function PaymentTable({payments}: PaymentTableProps) {
       </thead>
       <tbody className="table-body">
         {
-          payments ?
+          payments &&
           payments.map(payment => {
             if (payment.source) {
               return (
                 <tr key={payment.id}>
-                  <td>{capitalizeFirstLetter(payment.description)}</td>
-                  <td>{`${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
-                  <td>{formatDate(payment.createdAt)}</td>
-                  <td>{formatDate(payment.updatedAt)}</td>
-                  <td>{capitalizeFirstLetter(payment.source)}</td>
-                  <td>{capitalizeFirstLetter(payment.category.name)}</td>
+                  <td className="table-description">{capitalizeFirstLetter(payment.description)}</td>
+                  <td className="table-amount-income">{`${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
+                  <td className="table-created">{formatDate(payment.createdAt)}</td>
+                  <td className="table-updated">{formatDate(payment.updatedAt)}</td>
+                  <td className="table-source">{capitalizeFirstLetter(payment.source)}</td>
+                  <td className="table-category">{capitalizeFirstLetter(payment.category.name)} ({payment.category.id})</td>
                 </tr>
               )
-            } else if (payment.receiver) {
+            } else {
               return (
                 <tr key={payment.id}>
-                  <td>{capitalizeFirstLetter(payment.description)}</td>
-                  <td>{`${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
-                  <td>{formatDate(payment.createdAt)}</td>
-                  <td>{formatDate(payment.updatedAt)}</td>
-                  <td>{capitalizeFirstLetter(payment.receiver)}</td>
-                  <td>{capitalizeFirstLetter(payment.category.name)}</td>
+                  <td className="table-description">{capitalizeFirstLetter(payment.description)}</td>
+                  <td className="table-amount-expense">{`-${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
+                  <td className="table-created">{formatDate(payment.createdAt)}</td>
+                  <td className="table-updated">{formatDate(payment.updatedAt)}</td>
+                  <td className="table-receiver">{capitalizeFirstLetter(payment.receiver!)}</td>
+                  <td className="table-category">{capitalizeFirstLetter(payment.category.name)} ({payment.category.id})</td>
                 </tr>
               )
-            }})
-          :
-          <tr>
-          </tr>
+            }
+          })
         }
       </tbody>
-      </table>
+    </table>
   )
 }

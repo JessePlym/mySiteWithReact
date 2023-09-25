@@ -26,10 +26,13 @@ export type FilterInputProps = {
   id: string
   type: string
   value: string | number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setValue: any
   minValue?: number
   placeholder?: string
 }
 
 export type PaymentTableProps = {
   payments: Payment[]
+  paymentType: string
 }

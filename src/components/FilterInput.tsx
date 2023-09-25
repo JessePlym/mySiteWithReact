@@ -6,6 +6,7 @@ export default function FilterInput({
   id,
   type,
   value,
+  setValue,
   minValue,
   placeholder,
 }: FilterInputProps) {
@@ -20,6 +21,7 @@ export default function FilterInput({
         value={value}
         min={minValue}
         id={id}
+        onChange={e => setValue(e.target.value)}
       />
       {placeholder && // if placeholder present, render search button
         <button className="search-button">

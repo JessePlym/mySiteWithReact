@@ -35,7 +35,6 @@
 }
 
 .table-container input, .table-container select {
-  margin-bottom: 10px;
   border-style: solid;
   border-width: 2px;
   border-radius: 15px;
@@ -79,8 +78,13 @@
   background-color: #2a4879;
 }
 
-.source-filter, .receiver-filter {
-  /* display: none; */
+.source-filter, .receiver-filter, .category-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .payment-table {
@@ -118,11 +122,11 @@ tbody > tr:hover {
   display: none;
 }
 
-.table-amount-negative {
+.table-amount-expense {
   color: red;
 }
 
-.table-amount-positive {
+.table-amount-income {
   color: green;
 }
 

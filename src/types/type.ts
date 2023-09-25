@@ -4,7 +4,7 @@ export type Credentials = {
 }
 
 export type User = {
-  id: string
+  id: number
   firstName: string
   lastName: string
   username: string
@@ -13,12 +13,12 @@ export type User = {
 }
 
 export type Category = {
-  id: string
+  id: number
   name: string
 }
 
 export type Income = {
-  id: string
+  id: number
   amount: number
   description: string
   createdAt: string
@@ -30,7 +30,7 @@ export type Income = {
 }
 
 export type Expense = {
-  id: string
+  id: number
   amount: number
   description: string
   createdAt: string
@@ -42,7 +42,7 @@ export type Expense = {
 }
 
 export type Payment = {
-  id: string
+  id: number
   amount: number
   description: string
   createdAt: string

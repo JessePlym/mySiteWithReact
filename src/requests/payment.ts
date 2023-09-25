@@ -1,5 +1,5 @@
 import { API_URL } from "../assets/API"
-import { Expense, Income, Payment } from "../types/type"
+import { Expense, Income } from "../types/type"
 
 const token = localStorage.getItem("Authorization")
 const getRequestConfig: RequestInit = {
@@ -37,7 +37,7 @@ export async function getAllUsersPayments() {
   }
 }
 
-export async function getPaymentsByCategory(categoryId: number): Promise<Payment[] | void> {
+export async function getPaymentsByCategory(categoryId: number) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/by-category?category_id=${categoryId}`, getRequestConfig)
     if (!response.ok) {
@@ -50,7 +50,7 @@ export async function getPaymentsByCategory(categoryId: number): Promise<Payment
   }
 }
 
-export async function getIncome(): Promise<Income[] | void> {
+export async function getIncome() {
   try {
     const response = await fetch(`${API_URL}api/user/payments/income`, getRequestConfig)
     if (!response.ok) {
@@ -77,7 +77,7 @@ export async function getIncomeBySource(source: string): Promise<Income[] | void
   }
 }
 
-export async function getExpenses(): Promise<Expense[] | void> {
+export async function getExpenses() {
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense`, getRequestConfig)
     if (!response.ok) {
