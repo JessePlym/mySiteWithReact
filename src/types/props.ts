@@ -28,6 +28,7 @@ export type FilterInputProps = {
   value: string | number
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setValue: any
+  handleSearch?: (input: string, searchType: string) => Promise<void>
   minValue?: number
   placeholder?: string
 }

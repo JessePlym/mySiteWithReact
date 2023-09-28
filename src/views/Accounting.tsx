@@ -4,14 +4,16 @@ import PaymentTable from "../components/PaymentTable"
 import FilterInput from "../components/FilterInput"
 import { useEffect, useState } from "react"
 import { Payment } from "../types/type"
-import { getAllUsersPayments, getExpenses, getIncome, getPaymentsByCategory } from "../requests/payment"
+import { getAllUsersPayments, getExpenses, getExpensesByReceiver, getIncome, getIncomeBySource, getPaymentsByCategory } from "../requests/payment"
 
 
 export default function Accounting() {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [displayValue, setDisplayValue] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
-  const [categoryValue, setCategoryValue] = useState<number>(0)
+  const [categoryValue, setCategoryValue] = useState(0)
+  const [source, setSource] = useState("")
+  const [receiver, setReceiver] = useState("")
 
   useEffect(() => {
     const displayPayments = async () => {
@@ -41,12 +43,17 @@ export default function Accounting() {
   }, [payments])
 
   const handleCategoryFilter = (newValue: number) => {
-    if (newValue < 1) {
-      setCategoryValue(1)
+    newValue < 1 ? setCategoryValue(1) : setCategoryValue(newValue)
+  }
+
+  const handleSearch = async (input: string, searchType: string) => {
+    if (searchType === "source-input") {
+      setPayments(await getIncomeBySource(input))
+    } else if (searchType === "receiver-input") {
+      setPayments(await getExpensesByReceiver(input))
     } else {
-      setCategoryValue(newValue)
+      return
     }
-    
   }
 
   const calculateTotal = (payments: Payment[]) => {
@@ -66,7 +73,10 @@ export default function Accounting() {
         <div className="search-container">
           <div className="display-container">
             <label htmlFor="display" className="display-label">
-              Displaying all payments
+              {displayValue === "income" ? "Displaying income" 
+                : displayValue === "expense" ? "Displaying expenses" 
+                : "Displaying all payments"
+              }
             </label>
             <select id="select-display" value={displayValue} onChange={e => setDisplayValue(e.target.value)}>
               <option value="" style={{display: "none"}}></option>
@@ -75,15 +85,18 @@ export default function Accounting() {
               <option value="expense">Expenses</option>
             </select>
           </div>
-          <FilterInput 
-            className="category-filter"
-            id="category-input"
-            label="Filter by category ID"
-            type="number"
-            value={categoryValue}
-            setValue={handleCategoryFilter}
-            minValue={1}
-          />
+          {
+            (displayValue === "" || displayValue === "all") && 
+              <FilterInput 
+                className="category-filter"
+                id="category-input"
+                label="Filter by category ID"
+                type="number"
+                value={categoryValue}
+                setValue={handleCategoryFilter}
+                minValue={1}
+              />
+          }
           {
             displayValue === "income" ? 
               <FilterInput 
@@ -91,8 +104,9 @@ export default function Accounting() {
                 id="source-input"
                 label="Filter by source"
                 type="text"
-                value=""
-                setValue={setCategoryValue}
+                value={source}
+                handleSearch={handleSearch}
+                setValue={setSource}
                 placeholder="Enter payment source"
               />
             : displayValue === "expense" ?
@@ -101,8 +115,9 @@ export default function Accounting() {
                 id="receiver-input"
                 label="Filter by receiver"
                 type="text"
-                value=""
-                setValue={setCategoryValue}
+                value={receiver}
+                handleSearch={handleSearch}
+                setValue={setReceiver}
                 placeholder="Enter payment receiver"
               />
             : <></>

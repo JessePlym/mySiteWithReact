@@ -41,8 +41,10 @@ export async function getPaymentsByCategory(categoryId: number) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/by-category?category_id=${categoryId}`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = "Category with given id does not exist!"
-      alert(errorMsg)
+      // errorMsg = "Category with given id does not exist!"
+      // alert(errorMsg)
+      console.log(errorMsg)
+      return []
     }
     return await response.json()
   } catch (err) {
@@ -64,12 +66,13 @@ export async function getIncome() {
 }
 
 
-export async function getIncomeBySource(source: string): Promise<Income[] | void> {
+export async function getIncomeBySource(source: string) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/income/by-source?source=${source}`, getRequestConfig)
     if (!response.ok) {
       errorMsg = response.status + "\nFailed to get user income"
       alert(errorMsg)
+      return []
     }
     return await response.json()
   } catch (err) {
@@ -90,12 +93,13 @@ export async function getExpenses() {
   }
 }
 
-export async function getExpensesByReceiver(receiver: string): Promise<Expense[] | void> {
+export async function getExpensesByReceiver(receiver: string) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense/by-receiver?receiver=${receiver}`, getRequestConfig)
     if (!response.ok) {
       errorMsg = response.status + "\nFailed to get user expenses"
       alert(errorMsg)
+      return []
     }
     return await response.json()
   } catch (err) {
