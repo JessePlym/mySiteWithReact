@@ -15,17 +15,26 @@ export default function App() {
   
   useEffect(() => {
     async function testConnection() {
-      if (await isServerAwake()) {
-        setIsAwake(true)
+      const timeoutPromise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Server is restarting");
+        }, 5000);
+      });
+    
+      const isAwakePromise = isServerAwake();
+    
+      const result = await Promise.race([isAwakePromise, timeoutPromise]);
+      setIsAwake(true)
+
+      // result is true if isAwakePromise ran first
+      if (result === true && localStorage.getItem("Authorization")) {
+        setIsLoggedIn(true); 
+      } else {
+        localStorage.clear()
       }
+    
     }
     testConnection()
-  }, [])
-
-  useEffect(() => {
-    if (localStorage.getItem("Authorization")) {
-      setIsLoggedIn(true)
-    }
   }, [])
 
   if (isAwake) {
@@ -50,5 +59,7 @@ export default function App() {
         }
       </>
     )
+  } else {
+    return <h1>Loading...</h1>
   }
 }

@@ -3,16 +3,15 @@ import { User } from '../types/type'
 import ProfilePicture from "../images/profile_picture.jpg"
 import { Link } from "react-router-dom"
 import { getUserDetails } from '../requests/user'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Home({isLoggedIn, setIsLoggedIn}: HomeProps) {
   const [userDetails, setUserDetails] = useState<User>()
 
-  const token = useMemo(() => localStorage.getItem("Authorization") ?? "", [])
-
   useEffect(() => {
     async function fetchUser() {
-      if (isLoggedIn) {
+      const token = localStorage.getItem("Authorization")
+      if (token) {
         const user: User = await getUserDetails(token)
         setUserDetails(user)
       } else {
@@ -20,7 +19,7 @@ export default function Home({isLoggedIn, setIsLoggedIn}: HomeProps) {
       }
     }
     fetchUser()
-  }, [isLoggedIn, token])
+  }, [isLoggedIn])
 
   const logOut = () => {
     if (isLoggedIn) {
