@@ -1,7 +1,6 @@
 import { API_URL } from "../assets/API"
 
-export async function getUserDetails() {
-  const token = localStorage.getItem("Authorization")
+export async function getUserDetails(token: string) {
   const requestConfig = {
     method: "GET",
     headers: {

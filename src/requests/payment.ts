@@ -1,22 +1,27 @@
 import { API_URL } from "../assets/API"
 import { Expense, Income } from "../types/type"
 
-const token = localStorage.getItem("Authorization")
-const getRequestConfig: RequestInit = {
-  method: "GET",
-  headers: {
-    "Authorization": "Bearer " + token
+// const token = localStorage.getItem("Authorization")
+// const getRequestConfig: RequestInit = {
+//   method: "GET",
+//   headers: {
+//     "Authorization": "Bearer " + token
+//   }
+// }
+
+// let errorMsg = ""
+
+export async function getAllPayments(token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
   }
-}
-
-let errorMsg = ""
-
-export async function getAllPayments() {
   try {
     const response = await fetch(`${API_URL}api/user/payments/all`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = "Failed to get all payments"
-      alert(errorMsg)
+      alert("Failed to get all payments")
     }
     return await response.json()
   } catch (err) {
@@ -24,12 +29,17 @@ export async function getAllPayments() {
   }
 }
 
-export async function getAllUsersPayments() {
+export async function getAllUsersPayments(token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = "Failed to get user payments"
-      alert(errorMsg)
+      alert("Failed to get user payments")
     }
     return await response.json()
   } catch (err) {
@@ -37,13 +47,19 @@ export async function getAllUsersPayments() {
   }
 }
 
-export async function getPaymentsByCategory(categoryId: number) {
+export async function getPaymentsByCategory(categoryId: number, token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments/by-category?category_id=${categoryId}`, getRequestConfig)
     if (!response.ok) {
       // errorMsg = "Category with given id does not exist!"
       // alert(errorMsg)
-      console.log(errorMsg)
+      console.log("Category with given id does not exist!")
       return []
     }
     return await response.json()
@@ -52,12 +68,17 @@ export async function getPaymentsByCategory(categoryId: number) {
   }
 }
 
-export async function getIncome() {
+export async function getIncome(token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments/income`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = "Failed to get user income"
-      alert(errorMsg)
+      alert("Failed to get user income")
     }
     return await response.json()
   } catch (err) {
@@ -66,12 +87,17 @@ export async function getIncome() {
 }
 
 
-export async function getIncomeBySource(source: string) {
+export async function getIncomeBySource(source: string, token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments/income/by-source?source=${source}`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to get user income"
-      alert(errorMsg)
+      alert("\nFailed to get user income")
       return []
     }
     return await response.json()
@@ -80,12 +106,17 @@ export async function getIncomeBySource(source: string) {
   }
 }
 
-export async function getExpenses() {
+export async function getExpenses(token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to get user expenses"
-      alert(errorMsg)
+      alert("Failed to get user expenses")
     }
     return await response.json()
   } catch (err) {
@@ -93,12 +124,17 @@ export async function getExpenses() {
   }
 }
 
-export async function getExpensesByReceiver(receiver: string) {
+export async function getExpensesByReceiver(receiver: string, token: string) {
+  const getRequestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense/by-receiver?receiver=${receiver}`, getRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to get user expenses"
-      alert(errorMsg)
+      alert("Failed to get user expenses")
       return []
     }
     return await response.json()
@@ -107,7 +143,7 @@ export async function getExpensesByReceiver(receiver: string) {
   }
 }
 
-export async function addNewIncomeEntry(income: Income) {
+export async function addNewIncomeEntry(income: Income, token: string) {
   const postRequestConfig = {
     method: "POST",
     headers: {
@@ -119,8 +155,7 @@ export async function addNewIncomeEntry(income: Income) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/income/new-entry`, postRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + " \nFailed to add income"
-      alert(errorMsg)
+      alert("Failed to add income")
     } else {
       alert("Income added succesfully!")
     }
@@ -129,7 +164,7 @@ export async function addNewIncomeEntry(income: Income) {
   }
 }
 
-export async function addNewExpenseEntry(expense: Expense) {
+export async function addNewExpenseEntry(expense: Expense, token: string) {
   const postRequestConfig = {
     method: "POST",
     headers: {
@@ -141,8 +176,7 @@ export async function addNewExpenseEntry(expense: Expense) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense/new-entry`, postRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + " \nFailed to add expense"
-      alert(errorMsg)
+      alert("Failed to add expense")
     } else {
       alert("Expense added succesfully!")
     }
@@ -151,7 +185,7 @@ export async function addNewExpenseEntry(expense: Expense) {
   }
 }
 
-export async function updateIncome(incomeId: number, updatedIncome: Income) {
+export async function updateIncome(incomeId: number, updatedIncome: Income, token: string) {
   const putRequestConfig = {
     method: "PUT",
     headers: {
@@ -163,8 +197,7 @@ export async function updateIncome(incomeId: number, updatedIncome: Income) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/income/${incomeId}`, putRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to update information"
-      alert(errorMsg)
+      alert("Failed to update information")
     } else {
       alert("Information updated succesfully!")
     }
@@ -173,7 +206,7 @@ export async function updateIncome(incomeId: number, updatedIncome: Income) {
   }
 }
 
-export async function updateExpense(expenseId: number, updatedExpense: Expense) {
+export async function updateExpense(expenseId: number, updatedExpense: Expense, token: string) {
   const putRequestConfig = {
     method: "PUT",
     headers: {
@@ -185,8 +218,7 @@ export async function updateExpense(expenseId: number, updatedExpense: Expense) 
   try {
     const response = await fetch(`${API_URL}api/user/payments/expense/${expenseId}`, putRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to update information"
-      alert(errorMsg)
+      alert("Failed to update information")
     } else {
       alert("Information updated succesfully!")
     }
@@ -195,7 +227,7 @@ export async function updateExpense(expenseId: number, updatedExpense: Expense) 
   }
 }
 
-export async function deletePayment(paymentId: number) {
+export async function deletePayment(paymentId: number, token: string) {
   const deleteRequestConfig = {
     method: "DELETE",
     headers: {
@@ -205,8 +237,7 @@ export async function deletePayment(paymentId: number) {
   try {
     const response = await fetch(`${API_URL}api/user/payments/${paymentId}`, deleteRequestConfig)
     if (!response.ok) {
-      errorMsg = response.status + "\nFailed to delete"
-      alert(errorMsg)
+      alert("Failed to delete")
     }
   } catch (err) {
     console.log(err)

@@ -2,10 +2,15 @@ import { Link } from "react-router-dom"
 import "../styles/accounting.css"
 import PaymentTable from "../components/PaymentTable"
 import FilterInput from "../components/FilterInput"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Payment } from "../types/type"
-import { getAllUsersPayments, getExpenses, getExpensesByReceiver, getIncome, getIncomeBySource, getPaymentsByCategory } from "../requests/payment"
-
+import { getAllUsersPayments, 
+  getExpenses, 
+  getExpensesByReceiver, 
+  getIncome, 
+  getIncomeBySource, 
+  getPaymentsByCategory 
+} from "../requests/payment"
 
 export default function Accounting() {
   const [payments, setPayments] = useState<Payment[]>([]);
@@ -15,28 +20,30 @@ export default function Accounting() {
   const [source, setSource] = useState("")
   const [receiver, setReceiver] = useState("")
 
+  const token = useMemo(() => localStorage.getItem("Authorization") ?? "", [])
+
   useEffect(() => {
     const displayPayments = async () => {
       if (displayValue === "" || displayValue === "all") {
-        setPayments(await getAllUsersPayments())
+        setPayments(await getAllUsersPayments(token))
       } else if (displayValue === "income") {
-        setPayments(await getIncome())
+        setPayments(await getIncome(token))
       } else {
-        setPayments(await getExpenses())
+        setPayments(await getExpenses(token))
       }
     }
 
     displayPayments()
-  }, [displayValue])
+  }, [displayValue, token])
 
   useEffect(() => {
     const displayPayments = async () => {
       if (categoryValue === 0) return
-      setPayments(await getPaymentsByCategory(categoryValue))
+      setPayments(await getPaymentsByCategory(categoryValue, token))
     }
 
     displayPayments()
-  }, [categoryValue])
+  }, [categoryValue, token])
 
   useEffect(() => {
     calculateTotal(payments)
@@ -48,9 +55,9 @@ export default function Accounting() {
 
   const handleSearch = async (input: string, searchType: string) => {
     if (searchType === "source-input") {
-      setPayments(await getIncomeBySource(input))
+      setPayments(await getIncomeBySource(input, token))
     } else if (searchType === "receiver-input") {
-      setPayments(await getExpensesByReceiver(input))
+      setPayments(await getExpensesByReceiver(input, token))
     } else {
       return
     }
