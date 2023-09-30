@@ -1,12 +1,13 @@
-import { HomeProps } from '../types/props'
 import { User } from '../types/type'
 import ProfilePicture from "../images/profile_picture.jpg"
 import { Link } from "react-router-dom"
 import { getUserDetails } from '../requests/user'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import AuthContext from '../context/AuthContext'
 
-export default function Home({isLoggedIn, setIsLoggedIn}: HomeProps) {
+export default function Home() {
   const [userDetails, setUserDetails] = useState<User>()
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
 
   useEffect(() => {
     async function fetchUser() {
@@ -24,7 +25,7 @@ export default function Home({isLoggedIn, setIsLoggedIn}: HomeProps) {
   const logOut = () => {
     if (isLoggedIn) {
       localStorage.clear()
-      setIsLoggedIn(false)
+      setIsLoggedIn!(false)
     }
   }
 

@@ -3,18 +3,19 @@ import "../styles/register.css"
 import "../styles/index.css"
 import FormField from "../components/FormField"
 import { logIn } from "../requests/auth"
-import { FormEvent, useState } from "react"
+import { FormEvent, useContext, useState } from "react"
 import { Credentials } from "../types/type"
-import { LoginProps } from "../types/props"
+import AuthContext from "../context/AuthContext"
 
-export default function Login({setIsLoggedIn}: LoginProps) {
+export default function Login() {
   const [credentials, setCredentials] = useState<Credentials>({username: "", password: ""})
   const navigate = useNavigate()
+  const { setIsLoggedIn } = useContext(AuthContext)
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (await logIn(credentials)) {
-      setIsLoggedIn(true)
+      setIsLoggedIn!(true)
       navigate("/")
     }
   }
