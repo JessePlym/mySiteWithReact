@@ -11,6 +11,9 @@ import { getAllUsersPayments,
   getIncomeBySource, 
   getPaymentsByCategory 
 } from "../requests/payment"
+import Dialog from "../components/Dialog"
+import NewPaymentForm from "../components/NewPaymentForm"
+
 
 export default function Accounting() {
   const [payments, setPayments] = useState<Payment[]>([]);
@@ -19,6 +22,7 @@ export default function Accounting() {
   const [categoryValue, setCategoryValue] = useState(0)
   const [source, setSource] = useState("")
   const [receiver, setReceiver] = useState("")
+  const [openModal, setOpenModal] = useState(false)
 
   const token = useMemo(() => localStorage.getItem("Authorization") ?? "", [])
 
@@ -134,7 +138,7 @@ export default function Accounting() {
           <p className="total-amount">
             Total: {totalAmount.toFixed(2).replace(".", ",")}€
           </p>
-          <button className="add-new-button">
+          <button className="add-new-button" onClick={() => setOpenModal(true)}>
             Add
           </button>
         </div>
@@ -143,7 +147,12 @@ export default function Accounting() {
         <Link className="back-link" to="/">
           Go Back
         </Link>
+
       </main>
+
+      <Dialog open={openModal} >
+         <NewPaymentForm setOpenModal={setOpenModal}/>
+      </Dialog>
     </>
   )
 }

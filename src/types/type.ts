@@ -57,5 +57,5 @@ export type Payment = {
   receiver?: string
   source?: string
   category: Category
-  user: User
+  user?: User
 }
