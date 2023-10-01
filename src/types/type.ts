@@ -3,6 +3,12 @@ export type Credentials = {
   password: string
 }
 
+export type RegisterInfo = Credentials & {
+  firstName: string
+  lastName: string
+  passwordCheck: string
+}
+
 export type User = {
   id: number
   firstName: string
