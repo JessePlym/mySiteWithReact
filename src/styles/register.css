@@ -64,6 +64,16 @@ body {
   transition: 90ms;
 }
 
+.form-field > select {
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 2px;
+  padding: 10px;
+  font-size: 18px;
+  outline: none;
+  transition: 90ms;
+}
+
 .form-input:focus {
   border-color: #1457c3;
   border-width: 3px;

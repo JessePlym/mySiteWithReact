@@ -70,9 +70,9 @@ export default function Accounting() {
   const calculateTotal = (payments: Payment[]) => {
     const total = payments.reduce((total: number, payment: Payment) => {
       if (payment.source) {
-        return total + payment.amount
+        return total + Number(payment.amount)
       } else {
-        return total - payment.amount
+        return total - Number(payment.amount)
       }
     }, 0)
     setTotalAmount(total)

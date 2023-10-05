@@ -13,7 +13,7 @@ export type LoginProps = {
 export type FormFieldProps = {
   label: string
   name: string
-  value: string
+  value: string | number
   placeholder: string
   id: string
   type: string

@@ -10,7 +10,7 @@ const requestConfig: RequestInit = {
 }
 let errorMsg = ""
 
-export async function getAllCategories(): Promise<Category[] | void> {
+export async function getAllCategories() {
   try {
     const response = await fetch(`${API_URL}api/categories`, requestConfig)
     if (!response.ok) {

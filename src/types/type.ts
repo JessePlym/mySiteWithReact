@@ -48,14 +48,14 @@ export type Expense = {
 }
 
 export type Payment = {
-  id: number
-  amount: number
+  id?: number
+  amount: number | string
   description: string
   createdAt: string
   updatedAt: string
   isContinous: boolean
   receiver?: string
   source?: string
-  category: Category
   user?: User
+  category: Category
 }
