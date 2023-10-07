@@ -56,11 +56,11 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
     if (paymentType === "income") {
       const addedIncome: Income = {
         amount: Number(paymentDetails.amount),
-        description: paymentDetails.description,
+        description: paymentDetails.description ? paymentDetails.description : "No description",
         createdAt: paymentDetails.createdAt,
         updatedAt: paymentDetails.updatedAt,
         isContinous: paymentDetails.isContinous,
-        source: paymentDetails.source!,
+        source: paymentDetails.source ? paymentDetails.source : "No source",
         category: selectedCategory,
         user: paymentDetails.user!
       }
@@ -69,11 +69,11 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
     } else {
       const addedExpense: Expense = {
         amount: Number(paymentDetails.amount),
-        description: paymentDetails.description,
+        description: paymentDetails.description ? paymentDetails.description : "No description",
         createdAt: paymentDetails.createdAt,
         updatedAt: paymentDetails.updatedAt,
         isContinous: paymentDetails.isContinous,
-        receiver: paymentDetails.receiver!,
+        receiver: paymentDetails.receiver ? paymentDetails.receiver : "No receiver",
         category: selectedCategory,
         user: paymentDetails.user!
       }
@@ -83,7 +83,7 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
   }
 
   return (
-    <form className="modal-form" method="dialog" onSubmit={e => e.preventDefault()}>
+    <form className="modal-form" onSubmit={e => e.preventDefault()}>
       <h2>ADD PAYMENT</h2>
         <FormField 
           label="Description"

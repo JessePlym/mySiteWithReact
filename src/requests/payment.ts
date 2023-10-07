@@ -156,9 +156,7 @@ export async function addNewIncomeEntry(income: Income, token: string) {
     const response = await fetch(`${API_URL}api/user/payments/income/new-entry`, postRequestConfig)
     if (!response.ok) {
       alert("Failed to add income")
-    } else {
-      alert("Income added succesfully!")
-    }
+    } 
   } catch (err) {
     console.log(err)
   }
@@ -177,9 +175,7 @@ export async function addNewExpenseEntry(expense: Expense, token: string) {
     const response = await fetch(`${API_URL}api/user/payments/expense/new-entry`, postRequestConfig)
     if (!response.ok) {
       alert("Failed to add expense")
-    } else {
-      alert("Expense added succesfully!")
-    }
+    } 
   } catch (err) {
     console.log(err)
   }
