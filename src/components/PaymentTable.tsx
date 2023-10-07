@@ -46,7 +46,7 @@ export default function PaymentTable({payments, paymentType}: PaymentTableProps)
               return (
                 <tr key={payment.id}>
                   <td className="table-description">{capitalizeFirstLetter(payment.description)}</td>
-                  <td className="table-amount-income">{`${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
+                  <td className="table-amount-income">{`${Number(payment.amount).toFixed(2).replace(".", ",")} €`}</td>
                   <td className="table-created">{formatDate(payment.createdAt)}</td>
                   <td className="table-updated">{formatDate(payment.updatedAt)}</td>
                   <td className="table-source">{capitalizeFirstLetter(payment.source)}</td>
@@ -57,7 +57,7 @@ export default function PaymentTable({payments, paymentType}: PaymentTableProps)
               return (
                 <tr key={payment.id}>
                   <td className="table-description">{capitalizeFirstLetter(payment.description)}</td>
-                  <td className="table-amount-expense">{`-${payment.amount.toFixed(2).replace(".", ",")} €`}</td>
+                  <td className="table-amount-expense">{`-${Number(payment.amount).toFixed(2).replace(".", ",")} €`}</td>
                   <td className="table-created">{formatDate(payment.createdAt)}</td>
                   <td className="table-updated">{formatDate(payment.updatedAt)}</td>
                   <td className="table-receiver">{capitalizeFirstLetter(payment.receiver!)}</td>

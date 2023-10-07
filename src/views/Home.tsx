@@ -1,26 +1,12 @@
-import { User } from '../types/type'
 import ProfilePicture from "../images/profile_picture.jpg"
 import { Link } from "react-router-dom"
-import { getUserDetails } from '../requests/user'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
+import UserContext from '../context/UserContext'
 
 export default function Home() {
-  const [userDetails, setUserDetails] = useState<User>()
+  const { userDetails } = useContext(UserContext)
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext)
-
-  useEffect(() => {
-    async function fetchUser() {
-      const token = localStorage.getItem("Authorization")
-      if (token) {
-        const user: User = await getUserDetails(token)
-        setUserDetails(user)
-      } else {
-        setUserDetails({} as User)
-      }
-    }
-    fetchUser()
-  }, [isLoggedIn])
 
   const logOut = () => {
     if (isLoggedIn) {

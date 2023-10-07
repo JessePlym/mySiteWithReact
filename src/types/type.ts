@@ -24,7 +24,7 @@ export type Category = {
 }
 
 export type Income = {
-  id: number
+  id?: number
   amount: number
   description: string
   createdAt: string
@@ -36,7 +36,7 @@ export type Income = {
 }
 
 export type Expense = {
-  id: number
+  id?: number
   amount: number
   description: string
   createdAt: string

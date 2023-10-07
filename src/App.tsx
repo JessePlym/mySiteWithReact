@@ -6,6 +6,7 @@ import Login from "./views/Login.tsx"
 import Register from "./views/Register.tsx"
 import Accounting from "./views/Accounting.tsx"
 import AuthContext from "./context/AuthContext.tsx"
+import { UserProvider } from "./context/UserContext.tsx"
 
 
 
@@ -18,12 +19,14 @@ export default function App() {
         
           {
             isLoggedIn ? (
-              <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/register" element={<Register />}/>
-                <Route path="/application" element={<Accounting />}/>
-                <Route path="*" element={<Navigate to="/" />}/>
-              </Routes>
+              <UserProvider>
+                <Routes>
+                  <Route path="/" element={<Home />}/>
+                  <Route path="/register" element={<Register />}/>
+                  <Route path="/application" element={<Accounting />}/>
+                  <Route path="*" element={<Navigate to="/" />}/>
+                </Routes>
+              </UserProvider>
             ) : (
               <Routes>
                 <Route path="/" element={<Home />}/>

@@ -1,16 +1,14 @@
 import { API_URL } from "../assets/API"
-import { Category } from "../types/type"
 
-const token = localStorage.getItem("Authorization")
-const requestConfig: RequestInit = {
-  method: "GET",
-  headers: {
-    "Authorization": "Bearer " + token
-  }
-}
 let errorMsg = ""
 
-export async function getAllCategories() {
+export async function getAllCategories(token: string) {
+  const requestConfig: RequestInit = {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  }
   try {
     const response = await fetch(`${API_URL}api/categories`, requestConfig)
     if (!response.ok) {

@@ -16,9 +16,9 @@ import NewPaymentForm from "../components/NewPaymentForm"
 
 
 export default function Accounting() {
-  const [payments, setPayments] = useState<Payment[]>([]);
-  const [displayValue, setDisplayValue] = useState("");
-  const [totalAmount, setTotalAmount] = useState(0);
+  const [payments, setPayments] = useState<Payment[]>([])
+  const [displayValue, setDisplayValue] = useState("")
+  const [totalAmount, setTotalAmount] = useState(0)
   const [categoryValue, setCategoryValue] = useState(0)
   const [source, setSource] = useState("")
   const [receiver, setReceiver] = useState("")
@@ -38,7 +38,7 @@ export default function Accounting() {
     }
 
     displayPayments()
-  }, [displayValue, token])
+  }, [displayValue, token, openModal])
 
   useEffect(() => {
     const displayPayments = async () => {
