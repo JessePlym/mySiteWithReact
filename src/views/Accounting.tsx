@@ -38,7 +38,7 @@ export default function Accounting() {
     }
 
     displayPayments()
-  }, [displayValue, token, openModal])
+  }, [displayValue, token])
 
   useEffect(() => {
     const displayPayments = async () => {
@@ -58,7 +58,11 @@ export default function Accounting() {
   }
 
   const handleSearch = async (input: string, searchType: string) => {
-    if (searchType === "source-input") {
+    if (!input && searchType === "source-input") {
+      setPayments(await getIncome(token))
+    } else if (!input && searchType === "receiver-input") {
+      setPayments(await getExpenses(token))
+    } else if (searchType === "source-input") {
       setPayments(await getIncomeBySource(input, token))
     } else if (searchType === "receiver-input") {
       setPayments(await getExpensesByReceiver(input, token))
@@ -151,7 +155,7 @@ export default function Accounting() {
       </main>
 
       <Dialog open={openModal} >
-         <NewPaymentForm setOpenModal={setOpenModal}/>
+         <NewPaymentForm setOpenModal={setOpenModal} setPayments={setPayments}/>
       </Dialog>
     </>
   )

@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useContext, useEffect, useMemo, useState } fr
 import FormField from './FormField'
 import { getAllCategories } from '../requests/category'
 import { Payment, Category, Income, Expense } from '../types/type'
-import { addNewExpenseEntry, addNewIncomeEntry } from '../requests/payment'
+import { addNewExpenseEntry, addNewIncomeEntry, getAllUsersPayments } from '../requests/payment'
 import UserContext from '../context/UserContext'
 
 const initialCategory: Category = {
@@ -27,9 +27,10 @@ const initialFormState: Payment = {
 
 export type NewPaymentFormProps = {
   setOpenModal: Dispatch<SetStateAction<boolean>>
+  setPayments: Dispatch<SetStateAction<Payment[]>>
 }
 
-export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
+export default function NewPaymentForm({ setOpenModal, setPayments }: NewPaymentFormProps) {
   const [paymentDetails, setPaymentDetails] = useState<Payment>(initialFormState)
   const [selectedCategory, setSelectedCategory] = useState<Category>(initialCategory)
   const [categories, setCategories] = useState<Category[]>([])
@@ -52,7 +53,7 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
     setOpenModal(false)
   }
 
-  const savePayment = () => {
+  const savePayment = async () => {
     if (paymentType === "income") {
       const addedIncome: Income = {
         amount: Number(paymentDetails.amount),
@@ -64,8 +65,7 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
         category: selectedCategory,
         user: paymentDetails.user!
       }
-      addNewIncomeEntry(addedIncome, token)
-      setOpenModal(false)
+      await addNewIncomeEntry(addedIncome, token)
     } else {
       const addedExpense: Expense = {
         amount: Number(paymentDetails.amount),
@@ -77,9 +77,11 @@ export default function NewPaymentForm({ setOpenModal }: NewPaymentFormProps) {
         category: selectedCategory,
         user: paymentDetails.user!
       }
-      addNewExpenseEntry(addedExpense, token)
-      setOpenModal(false)
+      await addNewExpenseEntry(addedExpense, token)
     }
+    setPaymentDetails(initialFormState)
+    setPayments(await getAllUsersPayments(token))
+    setOpenModal(false)
   }
 
   return (
